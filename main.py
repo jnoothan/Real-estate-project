@@ -7,7 +7,7 @@ import pandas as pd
 # 1 ingest data
 # 2 preprocess data
 # 3 transform data
-# 4 model selection 
-# 5 model training
-# 6 Flask API Prediction
-# 7 Deployment
+# 4 split data  
+# 6 model selection & training
+# 7 Flask API Prediction
+# 8 Deployment
