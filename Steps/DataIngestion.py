@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-import click
+#import click
 import shutil
 
 # Specify folder path to batch data and merge the data
@@ -27,8 +27,10 @@ def data_ingestion(relative_path):
     Destination_csv_path = os.path.join(Destination_folder,merged_csv_name)
     shutil.move(Existing_csv_path,Destination_csv_path)
     
+    # Delete all csv files in valid data folder after merging and moving it to ingested Data folder
     for csv_file in os.listdir(path=relative_path):
-        os.remove(csv_file)
+        os.remove(os.path.join(relative_path, csv_file)
+    
     
     print('Data Ingested')
     return df
