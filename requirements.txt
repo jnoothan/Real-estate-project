@@ -8,3 +8,7 @@ xgboost
 lightgbm 
 catboost
 jupyter
+zenml==0.35.1
+optuna==2.10.0
+markupsafe==1.1.1
+joblib==1.1.0
