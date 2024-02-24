@@ -3,12 +3,11 @@ numpy
 scikit-learn
 matplotlib
 seaborn
-flask
 xgboost 
 lightgbm 
 catboost
 jupyter
-zenml==0.35.1
+zenml==0.55.0
 optuna==2.10.0
 markupsafe==1.1.1
 joblib==1.1.0

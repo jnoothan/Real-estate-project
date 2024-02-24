@@ -1,3 +1,4 @@
+# step 4
 import os
 import logging
 import pandas as pd
@@ -8,6 +9,7 @@ from lightgbm import LGBMRegressor
 from steps.DataPreprocessing import DataPreprocess
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
+import pickle
 
 
 class model_training:
@@ -124,6 +126,12 @@ class model_training:
             model.fit(self.x_train, self.y_train)
 
         return model
+
+    def model_pickle(model):
+        file_path = "model/model.pkl"
+        with open(file_path, "wb") as f:
+            pickle.dump(model, f)
+        return file_path
 
 
 if __name__ == "__main__":
