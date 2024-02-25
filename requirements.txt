@@ -9,5 +9,7 @@ catboost
 jupyter
 zenml==0.55.0
 optuna==2.10.0
+streamlit==1.8.1
+xgboost==1.5.2
 markupsafe==1.1.1
-joblib==1.1.0
+zenml==0.35.1
