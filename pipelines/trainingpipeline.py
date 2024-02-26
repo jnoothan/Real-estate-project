@@ -1,7 +1,8 @@
 from zenml import pipeline
 from Steps.DataValidation import DataValidation # returns csv files in ingested data folder
 from Steps.DataIngestion import data_ingestion # returns df ingests data as df into ingested data folder or invalid data folder
-from Steps.DataPreprocessing import DataPreprocess # returns x_train,X_test,y_train,y_test
+from Steps.DataPreprocessing import split_data # returns x_train,X_test,y_train,y_test
+from Steps.TrainModel import trained_model
 
 @pipeline()
 def trainingpipeline():
@@ -9,4 +10,6 @@ def trainingpipeline():
     DataValidation(folder_path)
     df=data_ingestion(Ingested Data)
     x_train,x_test,y_train,y_test=split_data(df)
+    trained_model(x_train,x_test,y_train,y_test)
+
 

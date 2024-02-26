@@ -11,7 +11,6 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
 import pickle
 
-@step
 class model_training:
     def __init__(self, x_train, x_test, y_train, y_test) -> tuple:
         self.x_train = x_train
@@ -19,7 +18,8 @@ class model_training:
         self.y_train = y_train
         self.y_test = y_test
 
-    def Model_selection_GridSearchCV(self) -> tuple:
+    @staticmethod
+    def Model_selection_GridSearchCV(x_train, x_test, y_train, y_test) -> tuple:
         param_grid_decision_tree = {
             "max_depth": [None, 10, 20],
             "min_samples_split": [2, 5, 10],
@@ -32,7 +32,7 @@ class model_training:
             cv=5,
         )
 
-        grid_search_decision_tree.fit(self.x_train, self.y_train)
+        grid_search_decision_tree.fit(x_train, y_train)
 
         Decision_Tree = {
             "Name": "Decision Tree",
@@ -50,7 +50,7 @@ class model_training:
             XGBRegressor(), param_grid_xgboost, scoring="neg_mean_squared_error", cv=5
         )
 
-        grid_search_xgboost.fit(self.x_train, self.y_train)
+        grid_search_xgboost.fit(x_train, y_train)
 
         XGBoost = {
             "Name": "XGBoost",
@@ -68,7 +68,7 @@ class model_training:
             LGBMRegressor(), param_grid_lightgbm, scoring="neg_mean_squared_error", cv=5
         )
 
-        grid_search_lightgbm.fit(self.x_train, self.y_train)
+        grid_search_lightgbm.fit(x_train, y_train)
 
         LightGBM = {
             "Name": "LightGBM",
@@ -89,7 +89,7 @@ class model_training:
             cv=5,
         )
 
-        grid_search_catboost.fit(self.x_train, self.y_train)
+        grid_search_catboost.fit(x_train, y_train)
 
         CatBoost = {
             "Name": "CatBoost",
@@ -102,32 +102,33 @@ class model_training:
         # Find the model with the minimum MSE
         min_model = min(list_of_models, key=lambda x: x["Best MSE"])
 
-        return min_model, self.x_train, self.y_train
+        return min_model
 
-
-    def model_fit(self, min_model):
+    @staticmethod
+    def model_fit( min_model,x_train, y_train):
         if min_model["Name"] == "Decision Tree":
             best_params = min_model["Best Parameters"]
             model = DecisionTreeRegressor(**best_params)
-            model.fit(self.x_train, self.y_train)
+            model.fit(x_train, y_train)
 
         elif min_model["Name"] == "XGBoost":
             best_params = min_model["Best Parameters"]
             model = XGBRegressor(**best_params)
-            model.fit(self.x_train, self.y_train)
+            model.fit(x_train, y_train)
 
         elif min_model["Name"] == "CatBoost":
             best_params = min_model["Best Parameters"]
             model = CatBoostRegressor(**best_params)
-            model.fit(self.x_train, self.y_train)
+            model.fit(x_train, y_train)
 
         elif min_model["Name"] == "LightGBM":
             best_params = min_model["Best Parameters"]
             model = LGBMRegressor(**best_params)
-            model.fit(self.x_train, self.y_train)
+            model.fit(x_train, y_train)
 
         return model
 
+    @staticmethod
     def model_pickle(model):
         file_path = "model/model.pkl"
         with open(file_path, "wb") as f:
@@ -135,16 +136,9 @@ class model_training:
         return file_path
 
 @step
-def trained_model():
+def trained_model(x_train,x_test,y_train,y_test):
+    min_model = model_training.Model_selection_GridSearchCV(x_train, x_test, y_train, y_test)
+    trained_model = model_training.model_fit(min_model, x_train, y_train)
+    return model_training.model_pickle(trained_model)
 
 
-if __name__ == "__main__":
-    # Replace x_train, x_test, y_train, y_test with your actual data
-    x_train, x_test, y_train, y_test = DataPreprocess()
-
-    # Create an instance of the class
-    model_instance = model_training(x_train, x_test, y_train, y_test)
-
-    # Call the methods using the instance
-    min_model, x_train, y_train = model_instance.Model_selection_GridSearchCV()
-    trained_model = model_instance.model_fit(min_model)
