@@ -10,7 +10,7 @@ import shutil
 @click.command()
 @click.option("--path", help="Folder Path of the batch data")
 @step
-def DataValidation(path):
+def Datavalidation(path):
     for i in os.listdir(path=path):
         if i.endswith(".csv"):
             current_csv_path = os.path.join(path, i)
