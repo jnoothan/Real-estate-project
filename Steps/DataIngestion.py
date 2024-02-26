@@ -11,9 +11,8 @@ import shutil
 
 # @click.command()
 # @click.option('--path', help='Folder path')
-relative_path = "ValidData"
+relative_path = "Ingested Data"
 
-@step
 def data_ingestion(relative_path):
     df = pd.DataFrame()
     for csv_file in os.listdir(path=relative_path):

@@ -8,5 +8,5 @@ def trainingpipeline():
     folder_path='/Data for ml'
     DataValidation(folder_path)
     df=data_ingestion(Ingested Data)
-    x_train,x_test,y_train,y_test=DataPreprocess(df)
+    x_train,x_test,y_train,y_test=split_data(df)
 

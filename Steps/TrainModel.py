@@ -11,7 +11,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
 import pickle
 
-
+@step
 class model_training:
     def __init__(self, x_train, x_test, y_train, y_test) -> tuple:
         self.x_train = x_train
@@ -104,6 +104,7 @@ class model_training:
 
         return min_model, self.x_train, self.y_train
 
+
     def model_fit(self, min_model):
         if min_model["Name"] == "Decision Tree":
             best_params = min_model["Best Parameters"]
@@ -132,6 +133,9 @@ class model_training:
         with open(file_path, "wb") as f:
             pickle.dump(model, f)
         return file_path
+
+@step
+def trained_model():
 
 
 if __name__ == "__main__":

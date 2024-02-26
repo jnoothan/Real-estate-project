@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from zenml import pipeline
 
-@step
 # preprocess data - handle missing values
 class DataPreprocess:
     def __init__(self, df) -> pd.DataFrame:
@@ -39,6 +38,11 @@ class DataPreprocess:
         )
         return x_train, x_test, y_train, y_test
 
+@step
+def split_data(df):
+    preprocess=DataPreprocess(df)
+    df = preprocess.data_transformation(self.df)
+    df = preprocess.feature_selection(df)
+    df = preprocess.one_hot_encoding(df)
+    return preprocess.data_splitting(df)
 
-if __name__ == "__main__":
-    DataPreprocess()
