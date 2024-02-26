@@ -38,7 +38,3 @@ def data_ingestion(relative_path):
 
     print("Data Ingested")
     return df
-
-
-if __name__ == "__main__":
-    data_ingestion(relative_path)
