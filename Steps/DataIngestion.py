@@ -1,6 +1,7 @@
 # step 2
 import os
 import pandas as pd
+from zenml import step
 
 
 # import click
@@ -12,7 +13,7 @@ import shutil
 # @click.option('--path', help='Folder path')
 relative_path = "ValidData"
 
-
+@step
 def data_ingestion(relative_path):
     df = pd.DataFrame()
     for csv_file in os.listdir(path=relative_path):
