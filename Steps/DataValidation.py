@@ -9,6 +9,7 @@ import shutil
 # segregate csv files into valid and invalid data folders by features
 @click.command()
 @click.option("--path", help="Folder Path of the batch data")
+@step
 def DataValidation(path):
     for i in os.listdir(path=path):
         if i.endswith(".csv"):
@@ -35,6 +36,3 @@ def DataValidation(path):
 
     print("csv files segregated. Check ValidData and InvalidData folders!")
 
-
-if __name__ == "__main__":
-    DataValidation()
