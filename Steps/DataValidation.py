@@ -2,13 +2,11 @@
 
 import os
 import pandas as pd
-import click
 import shutil
+from zenml import step
 
 
-# segregate csv files into valid and invalid data folders by features
-@click.command()
-@click.option("--path", help="Folder Path of the batch data")
+# segregate csv files into valid and invalid data folders by feature
 @step
 def Datavalidation(path):
     for i in os.listdir(path=path):
@@ -36,3 +34,8 @@ def Datavalidation(path):
 
     print("csv files segregated. Check Ingested Data and InvalidData folders!")
 
+
+if __name__=="__main__":
+
+    folder_path = '.\Data for ml'
+    Datavalidation(folder_path)

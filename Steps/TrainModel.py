@@ -6,10 +6,9 @@ from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
 from catboost import CatBoostRegressor
 from lightgbm import LGBMRegressor
-from steps.DataPreprocessing import DataPreprocess
-from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
 import pickle
+from zenml import step
 
 class model_training:
     def __init__(self, x_train, x_test, y_train, y_test) -> tuple:

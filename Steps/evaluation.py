@@ -32,7 +32,7 @@ class Evaluation:
         rmse = mean_squared_error(y_test, y_pred)
         return rmse
 
-@step
+
 @step
 def model_accuracy(x_train, x_test, y_train, y_test):
     eval = Evaluation(x_train, x_test, y_train, y_test)
