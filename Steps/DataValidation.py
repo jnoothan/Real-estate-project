@@ -27,12 +27,12 @@ def DataValidation(path):
             ]
             if set(current_csv.columns) == set(std_columns):
                 shutil.move(
-                    os.path.join(current_csv_path), os.path.join("ValidData", i)
+                    os.path.join(current_csv_path), os.path.join("Ingested Data", i)
                 )
             else:
                 shutil.move(
                     os.path.join(current_csv_path), os.path.join("InvalidData", i)
                 )
 
-    print("csv files segregated. Check ValidData and InvalidData folders!")
+    print("csv files segregated. Check Ingested Data and InvalidData folders!")
 

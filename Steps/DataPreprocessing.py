@@ -4,8 +4,9 @@ import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
+from zenml import pipeline
 
-
+@step
 # preprocess data - handle missing values
 class DataPreprocess:
     def __init__(self, df) -> pd.DataFrame:
