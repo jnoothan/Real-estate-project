@@ -13,7 +13,7 @@ from Steps.evaluation import model_accuracy  # Module for model evaluation
 def trainingpipeline():
     folder_path = '\Data for ml'
     Datavalidation(folder_path)
-    Ingested_folder=('Ingested Data')# Validate data
+    Ingested_folder=('\Ingested Data')# Validate data
     df = data_ingestion(Ingested_folder)  # Ingest data
     x_train, x_test, y_train, y_test = split_data(df)  # Split data
     trained_model(x_train, x_test, y_train, y_test)  # Train the model

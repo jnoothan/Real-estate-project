@@ -9,6 +9,13 @@ from lightgbm import LGBMRegressor
 from sklearn.model_selection import GridSearchCV
 import pickle
 from zenml import step
+import mlflow
+from zenml.client import Client
+experiment_tracker = Client().active_stack.experiment_tracker
+
+# Initialize MLflow
+mlflow.set_tracking_uri("your_mlflow_tracking_uri")  # Update with your MLflow tracking URI
+experiment_tracker = Client().active_stack.experiment_tracker
 
 class model_training:
     def __init__(self, x_train, x_test, y_train, y_test) -> tuple:
@@ -135,9 +142,19 @@ class model_training:
         return file_path
 
 @step
-def trained_model(x_train,x_test,y_train,y_test):
-    min_model = model_training.Model_selection_GridSearchCV(x_train, x_test, y_train, y_test)
-    trained_model = model_training.model_fit(min_model, x_train, y_train)
-    return model_training.model_pickle(trained_model)
+def trained_model(x_train, x_test, y_train, y_test):
+    with mlflow.start_run() as run:
+        # Enable autologging
+        mlflow.sklearn.autolog()
 
+        min_model = model_training.Model_selection_GridSearchCV(x_train, x_test, y_train, y_test)
+        trained_model = model_training.model_fit(min_model, x_train, y_train)
+
+        # Log parameters
+        mlflow.log_params(min_model["Best Parameters"])
+
+        # Log model
+        mlflow.sklearn.log_model(trained_model, "model")
+
+        return model_training.model_pickle(trained_model)
 

@@ -1,40 +1,45 @@
-# step 2
 import os
 import pandas as pd
 from zenml import step
-
-
-# import click
 import shutil
 
-# Specify folder path to batch data and merge the data
-
-# @click.command()
-# @click.option('--path', help='Folder path')
-relative_path = "Ingested Data"
 
 @step
 def data_ingestion(relative_path):
-    df = pd.DataFrame()
-    for csv_file in os.listdir(path=relative_path):
-        current_csv = os.path.join(relative_path, csv_file)
-        current_df = pd.read_csv(current_csv)
-        df = pd.concat([df, current_df], ignore_index=True)
+    # Initialize an empty list to store DataFrames
+    df_list = []
 
-    # Merge all batch Data
+    for csv_file in os.listdir(relative_path):
+        current_csv_path = os.path.join(relative_path, csv_file)
+        try:
+            current_df = pd.read_csv(current_csv_path)
+            df_list.append(current_df)  # Append the DataFrame to the list
+        except pd.errors.EmptyDataError:
+            print(f"Error: File {csv_file} has no columns.")
+
+    # Concatenate all DataFrames in the list
+    df = pd.concat(df_list, ignore_index=True)
+
+    if df.empty:
+        print("Error: No data found in any CSV file.")
+        return None
+
     merged_csv_name = "Data_merged_for_ml_training.csv"
     merged_csv_path = os.path.join(relative_path, merged_csv_name)
     df.to_csv(merged_csv_path, index=False)
 
-    # Move the merged
     Destination_folder = "Ingested Data"
-    Existing_csv_path = os.path.join(relative_path, merged_csv_name)
     Destination_csv_path = os.path.join(Destination_folder, merged_csv_name)
-    shutil.move(Existing_csv_path, Destination_csv_path)
+    shutil.move(merged_csv_path, Destination_csv_path)
 
-    # Delete all csv files in valid data folder after merging and moving it to ingested Data folder
-    for csv_file in os.listdir(path=relative_path):
+    for csv_file in os.listdir(relative_path):
         os.remove(os.path.join(relative_path, csv_file))
 
     print("Data Ingested")
+    df.to_csv('./Ingested Data/Ingested_data.csv')
     return df
+
+
+if __name__ == '__main__':
+    relative_path = "./Ingested Data"
+    data_ingestion(relative_path)
