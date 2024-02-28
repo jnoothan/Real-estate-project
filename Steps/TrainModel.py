@@ -1,6 +1,9 @@
 # step 4
 import os
 import logging
+import sys
+# Add the parent directory of 'Steps' package to the Python path
+sys.path.append('F:/Data Science/ML Projects 22-09-2023/Real estate project')
 import pandas as pd
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
@@ -12,6 +15,7 @@ from zenml import step
 import mlflow
 from zenml.client import Client
 experiment_tracker = Client().active_stack.experiment_tracker
+from Steps.DataPreprocessing import split_data
 
 # Initialize MLflow
 mlflow.set_tracking_uri("your_mlflow_tracking_uri")  # Update with your MLflow tracking URI
@@ -64,7 +68,7 @@ class model_training:
             "Best MSE": -grid_search_xgboost.best_score_,
         }
 
-        param_grid_lightgbm = {
+        """param_grid_lightgbm = {
             "learning_rate": [0.01, 0.1, 0.2],
             "max_depth": [3, 5, 7],
             "n_estimators": [50, 100, 200],
@@ -80,7 +84,7 @@ class model_training:
             "Name": "LightGBM",
             "Best Parameters": grid_search_lightgbm.best_params_,
             "Best MSE": -grid_search_lightgbm.best_score_,
-        }
+        }"""
 
         param_grid_catboost = {
             "learning_rate": [0.01, 0.1, 0.2],
@@ -103,7 +107,7 @@ class model_training:
             "Best MSE": -grid_search_catboost.best_score_,
         }
 
-        list_of_models = [Decision_Tree, XGBoost, LightGBM, CatBoost]
+        list_of_models = [Decision_Tree, XGBoost, CatBoost]
 
         # Find the model with the minimum MSE
         min_model = min(list_of_models, key=lambda x: x["Best MSE"])
@@ -158,3 +162,8 @@ def trained_model(x_train, x_test, y_train, y_test):
 
         return model_training.model_pickle(trained_model)
 
+
+if __name__=='__main__':
+    df = pd.read_csv(r'F:\Data Science\ML Projects 22-09-2023\Real estate project\Ingested Data\Ingested_data.csv')
+    x_train,x_test,y_train,y_test=split_data(df)
+    trained_model(x_train,x_test,y_train,y_test)
