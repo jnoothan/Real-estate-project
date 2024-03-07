@@ -36,7 +36,7 @@ def data_ingestion(relative_path):
         os.remove(os.path.join(relative_path, csv_file))
 
     print("Data Ingested")
-    df.to_csv('./Ingested Data/Ingested_data.csv')
+    df.to_csv('./Ingested Data/Ingested_data.csv',index=False)
     return df
 
 

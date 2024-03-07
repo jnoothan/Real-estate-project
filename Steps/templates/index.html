@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Prediction</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <h1>Price Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="bed">Bedrooms:</label>
+        <input type="number" name="bed" id="bed" required>
+        <label for="bath">Bathrooms:</label>
+        <input type="number" name="bath" id="bath" required>
+        <label for="acre_lot">Acre Lot:</label>
+        <input type="number" name="acre_lot" id="acre_lot" step="0.01" required>
+        <label for="house_size">House Size:</label>
+        <input type="number" name="house_size" id="house_size" step="0.01" required>
+        <label for="state">State:</label>
+        <select name="state" id="state" required>
+            {% for state in state_names %}
+                <option value="{{ state }}">{{ state }}</option>
+            {% endfor %}
+        </select>
+        <label for="city">City:</label>
+        <select name="city" id="city" required>
+            <option value="">Select a state first</option>
+        </select>
+        <button type="submit">Predict</button>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#state').change(function () {
+                var selectedState = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/get_cities',
+                    data: {'state': selectedState},
+                    success: function (response) {
+                        var cities = response.cities;
+                        var cityDropdown = $('#city');
+                        cityDropdown.empty();
+                        $.each(cities, function (index, city) {
+                            cityDropdown.append($('<option></option>').attr('value', city).text(city));
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
