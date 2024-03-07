@@ -29,10 +29,10 @@ def Datavalidation(path):
                 )
             else:
                 shutil.move(
-                    os.path.join(current_csv_path), os.path.join("InvalidData", i)
+                    os.path.join(current_csv_path), os.path.join("Invalid_Data", i)
                 )
 
-    print("csv files segregated. Check Ingested Data and InvalidData folders!")
+    print("csv files segregated. Check Valid_Data and Invalid_Data folders!")
 
 
 if __name__=="__main__":
