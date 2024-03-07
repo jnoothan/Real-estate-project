@@ -26,7 +26,7 @@ def data_ingestion(relative_path):
 
     merged_csv_name = "Ingested_Data.csv"
     merged_csv_path = os.path.join(relative_path, merged_csv_name)
-    df.to_csv(merged_csv_path, index=True)
+    df.to_csv(merged_csv_path, index=False)
 
     Destination_folder = "Ingested Data"
     Destination_csv_path = os.path.join(Destination_folder, merged_csv_name)
