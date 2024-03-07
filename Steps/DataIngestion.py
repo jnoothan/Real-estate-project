@@ -24,9 +24,9 @@ def data_ingestion(relative_path):
         print("Error: No data found in any CSV file.")
         return None
 
-    merged_csv_name = "Data_merged_for_ml_training.csv"
+    merged_csv_name = "Ingested_Data.csv"
     merged_csv_path = os.path.join(relative_path, merged_csv_name)
-    df.to_csv(merged_csv_path, index=False)
+    df.to_csv(merged_csv_path, index=True)
 
     Destination_folder = "Ingested Data"
     Destination_csv_path = os.path.join(Destination_folder, merged_csv_name)
@@ -41,5 +41,5 @@ def data_ingestion(relative_path):
 
 
 if __name__ == '__main__':
-    relative_path = "./Ingested Data"
+    relative_path = "./Valid_Data"
     data_ingestion(relative_path)

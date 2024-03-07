@@ -25,7 +25,7 @@ def Datavalidation(path):
             ]
             if set(current_csv.columns) == set(std_columns):
                 shutil.move(
-                    os.path.join(current_csv_path), os.path.join("Ingested Data", i)
+                    os.path.join(current_csv_path), os.path.join("Valid_Data", i)
                 )
             else:
                 shutil.move(
