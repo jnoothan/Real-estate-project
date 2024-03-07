@@ -1,40 +1,36 @@
-# step 5
-import os
-import logging
-import pandas as pd
-from sklearn.tree import DecisionTreeRegressor
-from xgboost import XGBRegressor
-from catboost import CatBoostRegressor
-from lightgbm import LGBMRegressor
-from steps.DataPreprocessing import DataPreprocess
-from flask import Flask, request, jsonify
-import joblib
+from flask import Flask, render_template, request
+import pickle
 
 app = Flask(__name__)
 
+# Load the trained model from the pickle file
+with open('trained_model.pkl', 'rb') as f:
+    model = pickle.load(f)
 
-@app.route("/predict_price", methods=["POST"])
-def predict_price():
-    data = request.get_json()
-    # Load the trained model
-    model = joblib.load("model/model.pkl")
-    # Extract features from the request
-    bed = data["bed"]
-    bath = data["bath"]
-    acre_lot = data["acre_lot"]
-    city = data["city"]
-    state = data["state"]
-    house_size = data["house_size"]
 
-    # Process the features as needed
-    # For example, you may need to encode categorical features like city and state
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-    # Make the prediction
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Get input values from the form
+    bed = int(request.form['bed'])
+    bath = int(request.form['bath'])
+    acre_lot = float(request.form['acre_lot'])
+    city = request.form['city']
+    state = request.form['state']
+    house_size = int(request.form['house_size'])
+
+    # You can perform any additional processing or data cleaning here if needed
+
+    # Make predictions using the loaded model
     prediction = model.predict([[bed, bath, acre_lot, house_size]])
 
-    # Return the prediction as JSON
-    return jsonify({"predicted_price": prediction[0]})
+    # Return the prediction
+    return render_template('index.html', prediction=f'Predicted Price: ${prediction[0]:,.2f}')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
