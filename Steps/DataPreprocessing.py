@@ -7,6 +7,7 @@ from zenml import step
 import logging
 import os
 import pickle
+from typing import Tuple,Annotated
 
 # Set up logging
 logging.basicConfig(filename='data_preprocessing.log', level=logging.ERROR,
@@ -64,13 +65,14 @@ class DataPreprocess:
             return None, None, None, None
 
 @step
-def split_data(df) -> (pd.DataFrame,  pd.DataFrame,pd.Series, pd.Series):
+def split_data(df:pd.DataFrame) -> Tuple[Annotated[pd.DataFrame,'x_train'],Annotated[pd.DataFrame,'x_test'],Annotated[pd.Series,'y_train'], Annotated[pd.Series,'y_test']]:
     preprocess = DataPreprocess(df)
     preprocess.data_transformation()
     preprocess.feature_selection()
     preprocess.label_encoding()
     type(preprocess.data_splitting())
-    return preprocess.data_splitting()
+    x_train, x_test, y_train, y_test = preprocess.data_splitting()
+    return x_train, x_test, y_train, y_test
 
 if __name__ == '__main__':
     try:

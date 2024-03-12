@@ -10,6 +10,7 @@ from Steps.DataPreprocessing import split_data  # Module to split data
 from Steps.TrainModel import trained_model  # Module to train the model
 from Steps.evaluation import model_accuracy  # Module for model evaluation # Module for model Prediction flask
 
+@pipeline(enable_cache=True)
 def trainingpipeline():
     folder_path = './Data for ml'
     DataValidation(folder_path)
@@ -20,5 +21,4 @@ def trainingpipeline():
     model_accuracy(x_train, x_test, y_train, y_test)
 
 if __name__ == '__main__':
-    training=trainingpipeline()
-    training.run()
+    trainingpipeline()

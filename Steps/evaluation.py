@@ -6,6 +6,7 @@ import sys
 sys.path.append('F:/Data Science/ML Projects 22-09-2023/Real estate project')
 from Steps.DataPreprocessing import split_data
 import logging
+from typing import Tuple,Annotated
 
 # Set up logging
 logging.basicConfig(filename='model_evaluation.log', level=logging.ERROR,
@@ -74,7 +75,7 @@ class Evaluation:
 
 
 @step
-def model_accuracy(x_train, x_test, y_train, y_test):
+def model_accuracy(x_train:pd.DataFrame, x_test:pd.DataFrame, y_train:pd.Series, y_test:pd.Series)->Tuple[Annotated[float,'score'], Annotated[float,'mse'], Annotated[float,'r2_score'], Annotated[float,'rmse']]:
     try:
         # Create an Evaluation instance
         eval = Evaluation(x_train, x_test, y_train, y_test)

@@ -123,7 +123,7 @@ class model_training:
             return None
 
 @step
-def trained_model(x_train, x_test, y_train, y_test):
+def trained_model(x_train:pd.DataFrame, x_test:pd.DataFrame, y_train:pd.Series, y_test:pd.Series)->str:
     try:
         min_model = model_training.Model_selection_GridSearchCV(x_train, x_test, y_train, y_test)
         trained_model = model_training.model_fit(min_model, x_train, y_train)

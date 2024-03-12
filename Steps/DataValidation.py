@@ -8,8 +8,8 @@ from zenml import step
 logging.basicConfig(filename='data_validation.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-@step
-def DataValidation(path):
+@step(enable_cache=False)
+def DataValidation(path:str)->None:
     try:
         for i in os.listdir(path=path):
             if i.endswith(".csv"):
