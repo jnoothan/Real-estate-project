@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/Data Science/ML Projects 22-09-2023/Real estate project/your_mlflow_tracking_uri/0/276f707e2b5e4c6aad06a5005e77db5c/artifacts
+end_time: 1709102739942
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 276f707e2b5e4c6aad06a5005e77db5c
+run_name: thundering-bug-373
+run_uuid: 276f707e2b5e4c6aad06a5005e77db5c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709102406282
+status: 3
+tags: []
+user_id: jnoot

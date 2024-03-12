@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/Data Science/ML Projects 22-09-2023/Real estate project/your_mlflow_tracking_uri/0/03b57ad5442b45c6a8774ab83abc63d1/artifacts
+end_time: 1709102751113
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 03b57ad5442b45c6a8774ab83abc63d1
+run_name: traveling-chimp-438
+run_uuid: 03b57ad5442b45c6a8774ab83abc63d1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709102406282
+status: 4
+tags: []
+user_id: jnoot

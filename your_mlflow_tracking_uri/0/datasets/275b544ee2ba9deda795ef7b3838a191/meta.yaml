@@ -1,0 +1,12 @@
+digest: 190b2e6c
+name: dataset
+profile: '{"num_rows": 541713, "num_elements": 3791991}'
+schema: '{"mlflow_colspec": [{"type": "long", "name": "Unnamed: 0", "required": true},
+  {"type": "integer", "name": "bed", "required": true}, {"type": "integer", "name":
+  "bath", "required": true}, {"type": "double", "name": "acre_lot", "required": true},
+  {"type": "integer", "name": "city", "required": true}, {"type": "integer", "name":
+  "state", "required": true}, {"type": "integer", "name": "house_size", "required":
+  true}]}'
+source: '{"tags": {"mlflow.user": "jnoot", "mlflow.source.name": "Steps/TrainModel.py",
+  "mlflow.source.type": "LOCAL", "mlflow.source.git.commit": "32a872fd510ba36cce8186333218aba83ca1768d"}}'
+source_type: code

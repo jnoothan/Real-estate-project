@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/Data Science/ML Projects 22-09-2023/Real estate project/your_mlflow_tracking_uri/0/cc7d7312276b44fba51270ab0175b66a/artifacts
+end_time: 1709103873813
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cc7d7312276b44fba51270ab0175b66a
+run_name: popular-cub-409
+run_uuid: cc7d7312276b44fba51270ab0175b66a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709102860999
+status: 3
+tags: []
+user_id: jnoot

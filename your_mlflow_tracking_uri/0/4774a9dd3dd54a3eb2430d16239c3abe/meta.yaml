@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/Data Science/ML Projects 22-09-2023/Real estate project/your_mlflow_tracking_uri/0/4774a9dd3dd54a3eb2430d16239c3abe/artifacts
+end_time: 1709103226032
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4774a9dd3dd54a3eb2430d16239c3abe
+run_name: spiffy-snipe-108
+run_uuid: 4774a9dd3dd54a3eb2430d16239c3abe
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709102860999
+status: 3
+tags: []
+user_id: jnoot

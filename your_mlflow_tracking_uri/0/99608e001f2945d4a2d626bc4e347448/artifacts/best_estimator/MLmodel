@@ -1,0 +1,28 @@
+artifact_path: best_estimator
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.9.12
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.4.1.post1
+mlflow_version: 2.10.2
+model_size_bytes: 436208
+model_uuid: bbb7138035e34ca19c4d00e1e3c09fae
+run_id: 99608e001f2945d4a2d626bc4e347448
+signature:
+  inputs: '[{"type": "long", "name": "Unnamed: 0", "required": true}, {"type": "integer",
+    "name": "bed", "required": true}, {"type": "integer", "name": "bath", "required":
+    true}, {"type": "double", "name": "acre_lot", "required": true}, {"type": "integer",
+    "name": "city", "required": true}, {"type": "integer", "name": "state", "required":
+    true}, {"type": "integer", "name": "house_size", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+utc_time_created: '2024-02-28 07:04:31.596985'

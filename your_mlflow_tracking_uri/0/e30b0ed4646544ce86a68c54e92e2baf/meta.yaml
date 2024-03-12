@@ -1,0 +1,15 @@
+artifact_uri: file:///F:/Data Science/ML Projects 22-09-2023/Real estate project/your_mlflow_tracking_uri/0/e30b0ed4646544ce86a68c54e92e2baf/artifacts
+end_time: 1709102363954
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e30b0ed4646544ce86a68c54e92e2baf
+run_name: resilient-skunk-748
+run_uuid: e30b0ed4646544ce86a68c54e92e2baf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709102351813
+status: 4
+tags: []
+user_id: jnoot
