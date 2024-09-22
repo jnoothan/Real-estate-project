@@ -4,6 +4,8 @@ from zenml import step
 import shutil
 import logging
 from typing import Tuple, Annotated
+from config.config import valid_data, root_path
+
 # Set up logging
 logging.basicConfig(filename='data_ingestion.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -55,11 +57,11 @@ def data_ingestion(relative_path:str)-> Annotated[pd.DataFrame,'Ingested_Data']:
             print(f"Error removing file: {e}")
 
     print("Data Ingested")
-    df.to_csv('./Ingested Data/Ingested_data.csv', index=False)
+    df.to_csv(root_path/'Ingested Data/Ingested_data.csv', index=False)
     print(type(df))
     return df
 
 
 if __name__ == '__main__':
-    relative_path = "./Valid_Data"
+    relative_path = valid_data
     data_ingestion(relative_path)

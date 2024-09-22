@@ -6,6 +6,7 @@ import logging
 import mysql.connector
 from mysql.connector import Error
 from typing import Tuple, Annotated
+from config.config import valid_data
 
 # Set up logging
 logging.basicConfig(filename='data_ingestion.log', level=logging.ERROR,
@@ -132,9 +133,9 @@ def data_ingestion(relative_path:str) -> Annotated[pd.DataFrame, 'Ingested_Data'
     log_step("Ingestion End", "Success", "Data ingestion completed successfully")
     print("Data Ingested")
     
-    df.to_csv('./Ingested Data/Ingested_data.csv', index=False)
+    df.to_csv(root_path'/Ingested Data/Ingested_data.csv', index=False)
     return df
 
 if __name__ == '__main__':
-    relative_path = "./Valid_Data"
+    relative_path = valid_data
     data_ingestion(relative_path)

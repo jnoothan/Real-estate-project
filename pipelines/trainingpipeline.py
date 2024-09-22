@@ -1,7 +1,6 @@
-import sys
-# Add the parent directory of 'Steps' package to the Python path
-sys.path.append('F:/Data Science/ML Projects 22-09-2023/Real estate project')
+
 from zenml import pipeline
+from config.config import data_for_ml, valid_data
 from Steps.DataValidation import DataValidation  # Module to validate data
 from Steps.DataIngestion import data_ingestion  # Module to ingest data
 from Steps.DataPreprocessing import split_data  # Module to split data
@@ -10,9 +9,9 @@ from Steps.evaluation import model_accuracy  # Module for model evaluation # Mod
 
 @pipeline(enable_cache=False)
 def trainingpipeline():
-    folder_path = './Data for ml'
+    folder_path = data_for_ml
     DataValidation(folder_path)
-    relative_path = "./Valid_Data"
+    relative_path = valid_data
     df=data_ingestion(relative_path)
     x_train, x_test, y_train, y_test = split_data(df)
     trained_model(x_train, x_test, y_train, y_test)
