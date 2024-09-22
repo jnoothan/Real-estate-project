@@ -15,10 +15,11 @@ logging.basicConfig(filename='data_ingestion.log', level=logging.ERROR,
 def create_connection():
     try:
         connection = mysql.connector.connect(
-            host='localhost',
-            user='your_username',
-            password='your_password',
-            database='real_estate_zenml'
+            host=os.getenv('MYSQL_HOST'),
+            port=int(os.getenv('MYSQL_PORT')), 
+            user=os.getenv('MYSQL_USER'),
+            password=os.getenv('MYSQL_PASSWORD'),
+            database=os.getenv('MYSQL_DATABASE')
         )
         return connection
     except Error as e:
