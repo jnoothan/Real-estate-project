@@ -9,3 +9,5 @@ streamlit==1.8.1
 xgboost==1.5.2
 markupsafe==1.1.1
 zenml==0.35.1
+typing-extensions
+mysql-connector-python
