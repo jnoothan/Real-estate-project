@@ -5,7 +5,7 @@ import pandas as pd
 import os
 from zenml import pipeline
 from Steps.DataValidation import DataValidation  # Module to validate data
-from Steps.DataIngestion import data_ingestion  # Module to ingest data
+from Steps.DataIngestion2 import data_ingestion  # Module to ingest data
 from Steps.DataPreprocessing import split_data  # Module to split data
 from Steps.TrainModel import trained_model  # Module to train the model
 from Steps.evaluation import model_accuracy  # Module for model evaluation # Module for model Prediction flask
